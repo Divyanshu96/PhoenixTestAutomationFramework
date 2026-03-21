@@ -1,0 +1,98 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$ref": "#/definitions/Welcome3",
+    "definitions": {
+        "Welcome3": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "data": {
+                    "$ref": "#/definitions/Data"
+                }
+            },
+            "required": [
+                "data",
+                "message"
+            ],
+            "title": "Welcome3"
+        },
+        "Data": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "first_name": {
+                    "type": "string"
+                },
+                "last_name": {
+                    "type": "string"
+                },
+                "login_id": {
+                    "type": "string"
+                },
+                "mobile_number": {
+                    "type": "string"
+                },
+                "email_id": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "reset_password_date": {
+                    "type": "null"
+                },
+                "lock_status": {
+                    "type": "integer"
+                },
+                "is_active": {
+                    "type": "integer"
+                },
+                "mst_role_id": {
+                    "type": "integer"
+                },
+                "mst_service_location_id": {
+                    "type": "integer"
+                },
+                "created_at": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "modified_at": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "role_name": {
+                    "type": "string"
+                },
+                "service_location": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "created_at",
+                "email_id",
+                "first_name",
+                "id",
+                "is_active",
+                "last_name",
+                "lock_status",
+                "login_id",
+                "mobile_number",
+                "modified_at",
+                "mst_role_id",
+                "mst_service_location_id",
+                "password",
+                "reset_password_date",
+                "role_name",
+                "service_location"
+            ],
+            "title": "Data"
+        }
+    }
+}
