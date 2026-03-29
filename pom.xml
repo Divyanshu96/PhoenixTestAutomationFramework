@@ -6,8 +6,8 @@
   <name>PhoenixTestAutomationFramework</name>
   <description>PhoenixTestAutomationFramework</description>
   <properties>
-  <maven.compiler.source> 11 </maven.compiler.source>
-  <maven.compiler.target> 11 </maven.compiler.target>
+  <maven.compiler.source> 14 </maven.compiler.source>
+  <maven.compiler.target> 14 </maven.compiler.target>
   </properties>
   <dependencies>
   <!-- Source: https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
@@ -17,11 +17,7 @@
     <version>6.0.0</version>
     <scope>test</scope>
 </dependency>
-  	<dependency>
-  		<groupId>RestAssuredTutorial</groupId>
-  		<artifactId>RestAssuredTutorial</artifactId>
-  		<version>0.0.1-SNAPSHOT</version>
-  	</dependency>
+  	
   	<!-- Source: https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 <dependency>
     <groupId>com.fasterxml.jackson.core</groupId>
@@ -50,5 +46,15 @@
     <version>6.0.0</version>
     <scope>compile</scope>
 </dependency>
+<dependency>
+  		<groupId>RestAssuredTutorial</groupId>
+  		<artifactId>RestAssuredTutorial</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>AutomationAssignment</groupId>
+  		<artifactId>AutomationAssignment</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
   </dependencies>
 </project>

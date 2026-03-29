@@ -12,31 +12,22 @@ public class ConfigManager2 {
 	private static String path = "config/config.properties";
 	private static String env;
 
-	private ConfigManager2() { // constructor
-
+	private ConfigManager2() { // private constructor
 	}
 
 	static {
 
-		env = System.getProperty("env","qa");
+		env = System.getProperty("env", "qa");
 		env = env.toLowerCase().trim();
-		System.out.println("RunningTests in Env"+env);
+		System.out.println("Running Tests in Env" + env);
 		switch (env) {
-		case "dev": {
-			path = "config/config.dev.properties";
-			break;
-		}
-		case "qa": {
-			path = "config/config.qa.properties";
-			break;
-		}
+		case "dev" -> path = "config/config.dev.properties";
 
-		case "uat": {
-			path = "config/config.uat.properties";
-			break;
-		}
-		default:
-			path = "config/config.qa.properties";
+		case "qa" -> path = "config/config.qa.properties";
+
+		case "uat" -> path = "config/config.uat.properties";
+
+		default -> path = "config/config.qa.properties";
 		}
 
 		InputStream input = Thread.currentThread().getContextClassLoader().getResourceAsStream(path);

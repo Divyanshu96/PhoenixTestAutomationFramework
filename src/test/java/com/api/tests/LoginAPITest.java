@@ -8,8 +8,8 @@ import java.io.IOException;
 
 import org.testng.annotations.Test;
 
+import com.api.pojo.UserCredentials;
 import com.api.utils.ConfigManager2;
-import com.restassured.demo.UserCredentials;
 
 import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;
@@ -42,8 +42,7 @@ public class LoginAPITest {
 		.and()
 			.body("message",equalTo("Success"))
 		.and()
-		.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("Response-schema/LoginResponseSchema.json"));
-				
+		.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("Response-schema/LoginResponseSchema.json"));				
 	}
 
 	}
