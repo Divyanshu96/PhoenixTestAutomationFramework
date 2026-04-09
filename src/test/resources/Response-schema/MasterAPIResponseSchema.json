@@ -1,0 +1,265 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$ref": "#/definitions/Welcome5",
+    "definitions": {
+        "Welcome5": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "data": {
+                    "$ref": "#/definitions/Data"
+                }
+            },
+            "required": [
+                "data",
+                "message"
+            ],
+            "title": "Welcome5"
+        },
+        "Data": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "mst_oem": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Mst"
+                    }
+                },
+                "mst_model": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Mst"
+                    }
+                },
+                "mst_action_status": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Mst"
+                    }
+                },
+                "mst_warrenty_status": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Mst"
+                    }
+                },
+                "mst_platform": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Mst"
+                    }
+                },
+                "mst_product": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Mst"
+                    }
+                },
+                "mst_role": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Mst"
+                    }
+                },
+                "mst_service_location": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/MstServiceLocation"
+                    }
+                },
+                "mst_problem": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/MstProblem"
+                    }
+                },
+                "map_fst_pincode": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/MapFstPincode"
+                    }
+                }
+            },
+            "required": [
+                "map_fst_pincode",
+                "mst_action_status",
+                "mst_model",
+                "mst_oem",
+                "mst_platform",
+                "mst_problem",
+                "mst_product",
+                "mst_role",
+                "mst_service_location",
+                "mst_warrenty_status"
+            ],
+            "title": "Data"
+        },
+        "MapFstPincode": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "pincode": {
+                    "type": "integer"
+                },
+                "mst_service_location_id": {
+                    "type": "integer"
+                },
+                "mst_service_location_name": {
+                    "$ref": "#/definitions/MstServiceLocationName"
+                }
+            },
+            "required": [
+                "mst_service_location_id",
+                "mst_service_location_name",
+                "pincode"
+            ],
+            "title": "MapFstPincode"
+        },
+        "Mst": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "is_active": {
+                    "type": "integer"
+                },
+                "created_at": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "modified_at": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "mst_product_id": {
+                    "type": "integer"
+                },
+                "mst_oem_id": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "code",
+                "created_at",
+                "id",
+                "is_active",
+                "modified_at",
+                "name"
+            ],
+            "title": "Mst"
+        },
+        "MstProblem": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "modified_at": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            },
+            "required": [
+                "created_at",
+                "id",
+                "modified_at",
+                "name"
+            ],
+            "title": "MstProblem"
+        },
+        "MstServiceLocation": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "mobile_number": {
+                    "type": "string"
+                },
+                "email_id": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "pincode": {
+                    "type": "integer"
+                },
+                "country": {
+                    "type": "string"
+                },
+                "gstin": {
+                    "type": "string"
+                },
+                "is_repair_line_engineer": {
+                    "type": "integer"
+                },
+                "is_active": {
+                    "type": "integer"
+                },
+                "created_at": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "modified_at": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            },
+            "required": [
+                "address",
+                "code",
+                "country",
+                "created_at",
+                "email_id",
+                "gstin",
+                "id",
+                "is_active",
+                "is_repair_line_engineer",
+                "mobile_number",
+                "modified_at",
+                "name",
+                "pincode"
+            ],
+            "title": "MstServiceLocation"
+        },
+        "MstServiceLocationName": {
+            "type": "string",
+            "enum": [
+                "Service Center A",
+                "Service Center B"
+            ],
+            "title": "MstServiceLocationName"
+        }
+    }
+}
