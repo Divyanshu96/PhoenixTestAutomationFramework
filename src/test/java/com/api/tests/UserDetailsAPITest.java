@@ -16,7 +16,7 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 public class UserDetailsAPITest {
 	@Test
 	public void userDetailsAPITest() {
-		Header	authHeader = new Header("Authorization", getToken(null));
+		Header	authHeader = new Header("Authorization", getToken(FD));
 		
 		given()
 			.baseUri(ConfigManager2.getProperty("BASE_URI"))

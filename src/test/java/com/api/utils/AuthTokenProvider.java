@@ -1,13 +1,17 @@
 package com.api.utils;
 
+import static com.api.constant.Role.ENG;
+import static com.api.constant.Role.FD;
+import static com.api.constant.Role.QC;
+import static com.api.constant.Role.SUP;
 import static io.restassured.RestAssured.given;
+
 import static org.hamcrest.Matchers.equalTo;
 
-import static com.api.constant.Role.*;
+import io.restassured.http.ContentType;
 
 import com.api.constant.Role;
-import com.restassured.demo.UserCredentials;
-import io.restassured.http.ContentType;
+import com.api.pojo.UserCredentials;
 
 public class AuthTokenProvider {
 
@@ -25,17 +29,16 @@ public class AuthTokenProvider {
 		}
 
 		else if (role == QC) {
-			userCredentials = new UserCredentials("iameng", "password");
-		}
-
-		else if (role == ENG) {
 			userCredentials = new UserCredentials("iamqc", "password");
 		}
 
+		else if (role == ENG) {
+			userCredentials = new UserCredentials("iameng", "password");
+		}
+
 		String token = given().baseUri(ConfigManager2.getProperty("BASE_URI")).contentType(ContentType.JSON)
-				.body((userCredentials)).when().post("login").then().log().ifValidationFails()
-				.statusCode(200).body("message", equalTo("Success")).extract().body().jsonPath()
-				.getString("data.token");
+				.body((userCredentials)).when().post("login").then().log().ifValidationFails().statusCode(200)
+				.body("message", equalTo("Success")).extract().body().jsonPath().getString("data.token");
 		return token;
 	}
 
