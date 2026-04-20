@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 
 import static com.api.constant.Role.*;
 import com.api.utils.ConfigManager2;
+import com.api.utils.SpecUtil;
 
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
@@ -15,25 +16,13 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 
 public class UserDetailsAPITest {
 	@Test
-	public void userDetailsAPITest() {
-		Header	authHeader = new Header("Authorization", getToken(FD));
-		
+	public void userDetailsAPITest() {			
 		given()
-			.baseUri(ConfigManager2.getProperty("BASE_URI"))
-		.and()
-			.header(authHeader)
-		.and()
-			.accept(ContentType.JSON)
-			.log().uri()
-			.log().method()
-			.log().body()
-			.log().headers()
+		.spec(SpecUtil.requestSpecWithAuth(FD))
 		.when()
 			.get("userdetails")
 		.then()
-			.log().all()
-			.statusCode(200)
-			.time(lessThan(1000L))
+			.spec(SpecUtil.responseSpec_TEXT(200))
 		.and()
 			.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("Response-schema/UserDetailsResponseSchema.json"));
 		}
