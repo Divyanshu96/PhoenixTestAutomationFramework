@@ -5,8 +5,9 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
-  schedule: # Set the CRO for MIDNIGHT IST ---- UT
+  schedule: # Set the CRO for MIDNIGHT IST ---- UTC
     - cron: "30 18 * * *"
+    - cron: "30 17 * * *"
   workflow_dispatch: 
     inputs:
       env:
