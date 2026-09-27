@@ -21,8 +21,8 @@ public class CreateJobAPITest {
 				"");
 		CustomerAddress customerAddress = new CustomerAddress("1069", "Freinds", "Durga Ashram", "New Delhi",
 				"Chhattarpur", "110074", "India", "Delhi");
-		CustomerProduct customerProduct = new CustomerProduct("2025-06-30T18:30:00.000Z", "19753352666348",
-				"19753352666348", "19753352666348", "2025-06-30T18:30:00.000Z", 1, 1);
+		CustomerProduct customerProduct = new CustomerProduct("2025-06-30T18:30:00.000Z", "19753352666346",
+				"19753352666346", "19753352666346", "2025-06-30T18:30:00.000Z", 1, 1);
 		Problems problems = new Problems(1, "Battery Issue");
 		Problems[] problemsArray = new Problems[1];
 		problemsArray[0] = problems;
