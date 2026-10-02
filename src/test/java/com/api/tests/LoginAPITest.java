@@ -8,7 +8,7 @@ import java.io.IOException;
 
 import org.testng.annotations.Test;
 
-import com.api.pojo.UserCredentials;
+import com.api.request.model.UserCredentials;
 import com.api.utils.ConfigManager2;
 import com.api.utils.SpecUtil;
 
