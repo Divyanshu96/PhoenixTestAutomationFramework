@@ -1,5 +1,6 @@
 package com.api.tests;
 
+import static com.api.utils.DateTimeUtil.getTimeWithDaysAgo;
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.equalTo;
@@ -7,6 +8,8 @@ import static org.hamcrest.Matchers.startsWith;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.api.constant.Model;
@@ -22,15 +25,13 @@ import com.api.request.model.Customer;
 import com.api.request.model.CustomerAddress;
 import com.api.request.model.CustomerProduct;
 import com.api.request.model.Problems;
-import static com.api.utils.DateTimeUtil.*;
-import com.api.utils.SpecUtil;
+import static com.api.utils.SpecUtil.*;
 
 public class CreateJobAPITest {
-
-	@Test
-	public void createJobAPITest() {
-		// Creating the CreateJObPayload Object
-
+	private CreateJobPayload createJobPayload;
+	
+	@BeforeMethod(description = "Creating create job api request payload")
+	public void setup() {
 		Customer customer = new Customer("Divyanshu", "Sharma", "7042705899", "9560586629", "divyansshu786@gmail.com",
 				"");
 		CustomerAddress customerAddress = new CustomerAddress("1069", "Freinds", "Durga Ashram", "New Delhi",
@@ -44,12 +45,16 @@ public class CreateJobAPITest {
 		List<Problems> problemsList = new ArrayList<Problems>();
 		problemsList.add(problems);
 
-		CreateJobPayload createJobPayload = new CreateJobPayload(ServiceLocation.SERVICE_LOCATION_A.getCode(),Platform.FRONT_DESK.getCode(), Warranty_Status.IN_WARRANTY.getCode(), OEM.GOOGLE.getcode(), customer, customerAddress, customerProduct,
+		 createJobPayload = new CreateJobPayload(ServiceLocation.SERVICE_LOCATION_A.getCode(),Platform.FRONT_DESK.getCode(), Warranty_Status.IN_WARRANTY.getCode(), OEM.GOOGLE.getcode(), customer, customerAddress, customerProduct,
 				problemsList);
-
-		given().spec(SpecUtil.requestSpecWithAuth(Role.FD, createJobPayload)).log().all().when().post("/job/create")
+	}
+	
+	@Test (description = "Verify if the Create Job api is able to create in warranty jobs", groups = {"api", "regression","smoke"})
+	public void createJobAPITest() {
+		// Creating the CreateJObPayload Object
+		given().spec(requestSpecWithAuth(Role.FD, createJobPayload)).log().all().when().post("/job/create")
 				.then()
-				.spec(SpecUtil.responseSpec_OK()
+				.spec(responseSpec_OK()
 						.body(matchesJsonSchemaInClasspath("Response-schema/CreateJobAPIResponseSchema.json")))
 				.body("message", equalTo("Job created successfully. ")).body("data.mst_service_location_id", equalTo(1))
 				.body("data.job_number", startsWith("JOB_"));
