@@ -1,0 +1,64 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$ref": "#/definitions/Welcome10",
+    "definitions": {
+        "Welcome10": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "data": {
+                    "$ref": "#/definitions/Data"
+                }
+            },
+            "required": [
+                "data",
+                "message"
+            ],
+            "title": "Welcome10"
+        },
+        "Data": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "mst_service_location_id": {
+                    "type": "integer"
+                },
+                "mst_platform_id": {
+                    "type": "integer"
+                },
+                "mst_warrenty_status_id": {
+                    "type": "integer"
+                },
+                "mst_oem_id": {
+                    "type": "integer"
+                },
+                "tr_customer_id": {
+                    "type": "integer"
+                },
+                "tr_customer_product_id": {
+                    "type": "integer"
+                },
+                "job_number": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "job_number",
+                "mst_oem_id",
+                "mst_platform_id",
+                "mst_service_location_id",
+                "mst_warrenty_status_id",
+                "tr_customer_id",
+                "tr_customer_product_id"
+            ],
+            "title": "Data"
+        }
+    }
+}

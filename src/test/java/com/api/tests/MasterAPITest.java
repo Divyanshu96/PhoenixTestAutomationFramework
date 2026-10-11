@@ -1,29 +1,30 @@
 package com.api.tests;
 
-import static org.hamcrest.Matchers.*;
+import static com.api.constant.Role.FD;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.everyItem;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.hasKey;
+import static org.hamcrest.Matchers.notNullValue;
+
 import org.testng.annotations.Test;
 
-import com.api.utils.SpecUtil;
+import static com.api.utils.SpecUtil.*;
 
-import io.restassured.module.jsv.JsonSchemaValidator;
-
-import static com.api.constant.Role.*;
-import static com.api.utils.AuthTokenProvider.*;
-import static com.api.utils.ConfigManager2.*;
-
-import static io.restassured.RestAssured.*;
+import static io.restassured.module.jsv.JsonSchemaValidator.*;
 
 public class MasterAPITest {
 	
-	@Test
+	@Test(description = "Verify if the Master API response is giving correct response" , groups = {"api","regression","smoke"} )
 	public void masterAPITest() {
 		given()
-		.spec(SpecUtil.requestSpecWithAuth(FD))
+		.spec(requestSpecWithAuth(FD))
 		.when()	//action
 		.post("master") //postrequest
 		.then() //Validateable response
 		.log().all()
-		.spec(SpecUtil.responseSpec_OK())
+		.spec(responseSpec_OK())
 		.body("message",equalTo("Success")) //checking K:V
 		.body("data", notNullValue())//assertingbodydataisnotnull
 		.body("data",hasKey("mst_oem"))
@@ -34,18 +35,18 @@ public class MasterAPITest {
 		.body("data.mst_model.size()", greaterThan(0))
 		.body("data.mst_oem.id" , everyItem(notNullValue()))
 		.body("data.mst_oem.name" , everyItem(notNullValue()))
-		.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("Response-schema/MasterAPIResponseSchema.json"));
+		.body(matchesJsonSchemaInClasspath("Response-schema/MasterAPIResponseSchema.json"));
 		
 	}
-		@Test
+		@Test(description = "Verify if the Master API response is giving status code for invalid token" , groups = {"api","regression","smoke","negative"} )
 		public void InvalidTokenMasterAPITest() {
 			given()
-			.spec(SpecUtil.requestSpec())//EmptyContentType
+			.spec(requestSpec())//EmptyContentType
 			.log().all() //logrequestsection
 			.when()	//action
 			.post("master") //postrequest
 			.then() //Validateable response
-			.spec(SpecUtil.responseSpec_TEXT(401));
+			.spec(responseSpec_TEXT(401));
 		
 		
 }}
