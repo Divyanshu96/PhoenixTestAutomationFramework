@@ -2,55 +2,54 @@ name: Phoenix Test Automation Workflow
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ["master"]
   pull_request:
-    branches: [ "master" ]
+    branches: ["master"]
   schedule: # Set the CRO for MIDNIGHT IST ---- UTC
     - cron: "30 18 * * *"
     - cron: "30 22 * * *"
 
-  workflow_dispatch: 
+  workflow_dispatch:
     inputs:
       env:
-         description: "Environment"
-         type: choice
-         options: [qa,uat,dev]
-         default: qa
-         required: true
+        description: "Environment"
+        type: choice
+        options: [qa, uat, dev]
+        default: qa
+        required: true
       suiteXmlFile:
-         description: "TestNG XML File"
-         type: choice
-         options: [testng.xml,smoke.xml,regression.xml]
-         default: testng.xml
-         required: true
-jobs:  
+        description: "TestNG XML File"
+        type: choice
+        options: [testng.xml, smoke.xml, regression.xml]
+        default: testng.xml
+        required: true
+
+jobs:
   test:
-
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: Set up JDK 17
-      uses: actions/setup-java@v4
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-        cache: maven
-     
-     - name : Default Values for Execution
-      id : default
-      run : | 
-            echo "suiteXmlFile=${{ github.event.inputs.suiteXmlFile || 'testng.xml'}}" >> $GITHUB_OUTPUT
-            echo "env=${{ github.event.inputs.env || 'qa' }}" >> $GITHUB_OUTPUT              
-   
-    - name: Execute Test Automation Framework
-      run: mvn clean test -DsuiteXmlFile="${{ steps.default.outputs.suiteXmlFile }}" -Denv="${{ steps.default.outputs.env }}"
+      - uses: actions/checkout@v4
 
-    - name: Upload a Build Artifact
-      if: always()
-      uses: actions/upload-artifact@v7.0.1
-      with:
-        name: Surefire Report
-        path: target/surefire-reports/
-        retention-days: 10
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Default Values for Execution
+        id: default
+        run: |
+          echo "suiteXmlFile=${{ github.event.inputs.suiteXmlFile || 'testng.xml' }}" >> $GITHUB_OUTPUT
+          echo "env=${{ github.event.inputs.env || 'qa' }}" >> $GITHUB_OUTPUT
+
+      - name: Execute Test Automation Framework
+        run: mvn clean test -DsuiteXmlFile="${{ steps.default.outputs.suiteXmlFile }}" -Denv="${{ steps.default.outputs.env }}"
+
+      - name: Upload a Build Artifact
+        if: always()
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: Surefire Report
+          path: target/surefire-reports/
+          retention-days: 10
