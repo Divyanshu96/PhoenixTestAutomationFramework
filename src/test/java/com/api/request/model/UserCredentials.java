@@ -3,6 +3,6 @@ package com.api.request.model;
 public record UserCredentials(String username, String password) {
 	static int x;
 	
-	//Created by DivyanshuSharma
+	//Created by Divyanshu Sharma
 
 }
